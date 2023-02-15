@@ -28,3 +28,13 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+task runKTableSlidingWindowProcessing(type: JavaExec) {
+    classpath sourceSets.main.runtimeClasspath
+    main = 'org.example.KTableSlidingWindowProcessing'
+}
+
+task runStateStoreWindowProcessing(type: JavaExec) {
+    classpath sourceSets.main.runtimeClasspath
+    main = 'org.example.StateStoreSlidingWindowProcessing'
+}

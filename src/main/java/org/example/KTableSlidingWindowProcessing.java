@@ -17,7 +17,7 @@ import java.util.Properties;
 
 import static org.apache.kafka.streams.Topology.AutoOffsetReset.EARLIEST;
 
-public class Processing {
+public class KTableSlidingWindowProcessing {
     public static void main(String[] args) throws InterruptedException {
 
         StreamsConfig streamsConfig = new StreamsConfig(getProps());
