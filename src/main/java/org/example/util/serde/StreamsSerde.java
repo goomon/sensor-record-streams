@@ -6,6 +6,7 @@ import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serializer;
 import org.example.model.SensorMeanRecord;
 import org.example.model.SensorRecord;
+import org.example.model.cache.SensorWindowQueue;
 import org.example.util.serializer.JsonDeserializer;
 import org.example.util.serializer.JsonSerializer;
 
@@ -21,6 +22,10 @@ public class StreamsSerde {
         return new SensorMeanRecordSerde();
     }
 
+    public static Serde<SensorWindowQueue> SensorWindowQueueSerde() {
+        return new SensorWindowQueueSerde();
+    }
+
     public static class SensorRecordSerde extends WrapperSerde<SensorRecord> {
         public SensorRecordSerde() {
             super(new JsonSerializer<>(), new JsonDeserializer<>(SensorRecord.class));
@@ -30,6 +35,13 @@ public class StreamsSerde {
     public static class SensorMeanRecordSerde extends WrapperSerde<SensorMeanRecord> {
         public SensorMeanRecordSerde() {
             super(new JsonSerializer<>(), new JsonDeserializer<>(SensorMeanRecord.class));
+        }
+    }
+
+    public static class SensorWindowQueueSerde extends WrapperSerde<SensorWindowQueue> {
+
+        public SensorWindowQueueSerde() {
+            super(new JsonSerializer<>(), new JsonDeserializer<>(SensorWindowQueue.class));
         }
     }
 
