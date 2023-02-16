@@ -4,14 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d061a1a8-12f4-4ba9-9791-e45c4429dbdf" name="Changes" comment="env: gradle task settings">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/StateStoreSlidingWindowProcessing.java" afterDir="false" />
+    <list default="true" id="d061a1a8-12f4-4ba9-9791-e45c4429dbdf" name="Changes" comment="feat: sliding window processing based on state store&#10;&#10;* [WARNING] deprecated method - transformValues">
       <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/model/cache/SensorWindowQueue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/transformer/SensorWindowingTransformer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/config/ConnectionConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/config/ProcessingConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/util/serde/StreamsSerde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/util/serde/StreamsSerde.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/KTableSlidingWindowProcessing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/KTableSlidingWindowProcessing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/StateStoreSlidingWindowProcessing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/StateStoreSlidingWindowProcessing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/transformer/SensorWindowingTransformer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/transformer/SensorWindowingTransformer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +57,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -204,7 +205,8 @@
       <workItem from="1676429278752" duration="4459000" />
       <workItem from="1676434261531" duration="9377000" />
       <workItem from="1676446780713" duration="6895000" />
-      <workItem from="1676509386765" duration="9955000" />
+      <workItem from="1676509386765" duration="10160000" />
+      <workItem from="1676520508821" duration="661000" />
     </task>
     <task id="LOCAL-00001" summary="feat: basic sliding window sensor data processing">
       <created>1676452424278</created>
@@ -220,7 +222,21 @@
       <option name="project" value="LOCAL" />
       <updated>1676454872624</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="env: slf4j library">
+      <created>1676520396916</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1676520396916</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat: sliding window processing based on state store&#10;&#10;* [WARNING] deprecated method - transformValues">
+      <created>1676520481204</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1676520481204</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,7 +245,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: basic sliding window sensor data processing" />
     <MESSAGE value="env: gradle task settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="env: gradle task settings" />
+    <MESSAGE value="env: slf4j library" />
+    <MESSAGE value="feat: sliding window processing based on state store&#10;&#10;* [WARNING] deprecated method - transformValues" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: sliding window processing based on state store&#10;&#10;* [WARNING] deprecated method - transformValues" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

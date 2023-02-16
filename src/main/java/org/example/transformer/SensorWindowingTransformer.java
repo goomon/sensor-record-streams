@@ -8,6 +8,8 @@ import org.example.model.cache.SensorWindowQueue;
 
 import java.util.LinkedList;
 
+import static org.example.config.ProcessingConfig.*;
+
 public class SensorWindowingTransformer implements ValueTransformer<SensorMeanRecord, SensorMeanRecord> {
 
     private KeyValueStore<String, SensorWindowQueue> stateStore;
@@ -32,7 +34,7 @@ public class SensorWindowingTransformer implements ValueTransformer<SensorMeanRe
             sensorWindowQueue = stateStore.get(value.getUserId());
         }
         sensorWindowQueue.push(value);
-        if (sensorWindowQueue.getQueueSize() > 3) {
+        if (sensorWindowQueue.getQueueSize() > SLIDING_WINDOW_SECOND) {
             sensorWindowQueue.pop();
         }
         stateStore.put(value.getUserId(), sensorWindowQueue);

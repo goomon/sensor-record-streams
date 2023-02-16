@@ -23,6 +23,8 @@ import org.example.util.timstamp_extractor.SensorRecordTimestampExtractor;
 import java.util.Properties;
 
 import static org.apache.kafka.streams.Topology.AutoOffsetReset.*;
+import static org.example.config.ConnectionConfig.*;
+import static org.example.config.ProcessingConfig.*;
 
 public class StateStoreSlidingWindowProcessing {
 
@@ -36,7 +38,6 @@ public class StateStoreSlidingWindowProcessing {
         // Serializer & Deserializer setting
         Serde<String> stringSerde = Serdes.String();
         Serde<SensorRecord> sensorRecordSerde = StreamsSerde.SensorRecordSerde();
-        Serde<SensorMeanRecord> sensorMeanRecordSerde = StreamsSerde.SensorMeanRecordSerde();
         Serde<SensorWindowQueue> sensorWindowQueueSerde = StreamsSerde.SensorWindowQueueSerde();
 
         // State store setting
@@ -52,7 +53,7 @@ public class StateStoreSlidingWindowProcessing {
                         .withTimestampExtractor(new SensorRecordTimestampExtractor()));
         KStream<String, SensorMeanRecord> sensorFeatureKStream = sensorRecordKStream.mapValues(SensorMeanRecord::new)
                 .transformValues(() -> new SensorWindowingTransformer(STATE_STORE_NAME), STATE_STORE_NAME)
-                .filter((key, value) -> value.getTimestamp() % 2000 == 0);
+                .filter((key, value) -> value.getTimestamp() % WINDOWING_PERIOD_MS == 0);
         sensorFeatureKStream.print(Printed.<String, SensorMeanRecord>toSysOut().withLabel("feature"));
 
         // Execute Kafka streams
@@ -68,7 +69,7 @@ public class StateStoreSlidingWindowProcessing {
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "state-store-streams");
         props.put(ConsumerConfig.GROUP_INSTANCE_ID_CONFIG, "sample-instance-id");
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, "state-store-streams");
-        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:19092");
+        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVER);
         props.put(StreamsConfig.REPLICATION_FACTOR_CONFIG, 1);
         return props;
     }

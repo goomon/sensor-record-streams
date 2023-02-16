@@ -15,7 +15,9 @@ import org.example.util.timstamp_extractor.SensorRecordTimestampExtractor;
 import java.time.Duration;
 import java.util.Properties;
 
-import static org.apache.kafka.streams.Topology.AutoOffsetReset.EARLIEST;
+import static org.apache.kafka.streams.Topology.AutoOffsetReset.*;
+import static org.example.config.ConnectionConfig.*;
+import static org.example.config.ProcessingConfig.*;
 
 public class KTableSlidingWindowProcessing {
     public static void main(String[] args) throws InterruptedException {
@@ -36,8 +38,8 @@ public class KTableSlidingWindowProcessing {
         KTable<Windowed<String>, SensorMeanRecord> sensorFeatureTable = sensorMeanRecordKStream
                 .groupByKey(Grouped.with(stringSerde, sensorMeanRecordSerde))
                 .windowedBy(
-                        TimeWindows.ofSizeWithNoGrace(Duration.ofMillis(3000))
-                                .advanceBy(Duration.ofMillis(2000)))
+                        TimeWindows.ofSizeWithNoGrace(Duration.ofSeconds(SLIDING_WINDOW_SECOND))
+                                .advanceBy(Duration.ofMillis(WINDOWING_PERIOD_MS)))
                 .reduce(SensorMeanRecord::add);
         sensorFeatureTable.toStream().print(Printed.<Windowed<String>, SensorMeanRecord>toSysOut().withLabel("feature"));
 
@@ -52,7 +54,7 @@ public class KTableSlidingWindowProcessing {
         Properties props = new Properties();
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "sensor-data-streams");
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, "sensor-data-streams");
-        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:19092");
+        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVER);
         props.put(StreamsConfig.REPLICATION_FACTOR_CONFIG, 1);
         return props;
     }
